@@ -1,5 +1,5 @@
 {
-    "name": "UsersApi",
+    "name": "ProductsApi",
     "version": "1.2.0",
     "description": "REST API - Users",
     "main": "index.js",
