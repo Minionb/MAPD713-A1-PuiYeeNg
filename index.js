@@ -95,6 +95,29 @@ server.get('/products', function (req, res, next) {
   })
 })
 
+// Delete all products in the system
+server.del('/products', function (req, res, next) {
+  // log request information
+  console.log('> products DELETE: received request');
+  console.log('DELETE /products params=>' + JSON.stringify(req.params));
 
+  // log request counters
+  deleteRequestCounter += 1
+  console.log("Processed Request Count--> Get:" + getRequestCounter + ", Post:" + postRequestCounter + ", Delete:" + deleteRequestCounter)
+
+
+  // Delete all prodcuts with the persistence engine
+  productsSave.deleteMany({}, function (error, products) {
+
+    // log response information
+    console.log('< products DELETE: sending response');
+
+    // If there are any errors, pass them to next in the correct format
+    if (error) return next(new Error(JSON.stringify(error.errors)))
+
+    // Send a 204 response
+    res.send(204,products)
+  })
+})
 
 
